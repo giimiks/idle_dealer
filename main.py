@@ -1,21 +1,25 @@
 import pygame
 import assets.ui
+from assets.game_state import GameState
 
 FPS = 60
-bg = ["purple"]
 
 pygame.init()
 screen = pygame.display.set_mode(size=(1280, 720), vsync = 1)
 clock = pygame.time.Clock()
 running = True
 
-def bg_color_change(bg_color_variable):
-    if bg_color_variable[0] == "purple":
-        bg_color_variable[0]="orange"
+def bg_color_change(game_state: GameState):
+    if game_state.background == "purple":
+        game_state.background="orange"
     else:
-        bg_color_variable[0]="purple"
+        game_state.background="purple"
 
-button = assets.ui.Button((80,80), (600,600),on_click=lambda:bg_color_change(bg), label="test")
+game_state = GameState(background="orange")
+
+button = assets.ui.Button((80,80), (600,600),on_click=lambda:bg_color_change(game_state), label="test")
+
+
 
 ui_elements = [button]
 
@@ -29,7 +33,7 @@ while running:
     
     
     
-    screen.fill(bg[0])
+    screen.fill(game_state.background)
     
     for element in ui_elements:
             element.render(screen)
