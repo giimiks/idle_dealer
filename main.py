@@ -15,9 +15,11 @@ def bg_color_change(game_state: GameState):
     else:
         game_state.background="purple"
 
-game_state = GameState(background="orange")
+mousePos = (0,0)
 
-button = assets.ui.Button((80,80), (600,600),on_click=lambda:bg_color_change(game_state), label="test")
+game_state = GameState(background="orange")
+tooltip=assets.ui.Tooltip((50,50), (600, 600), label="tooltip", screen=screen)
+button = assets.ui.Button((80,80), (600,600),on_click=lambda:bg_color_change(game_state), label="test", tooltip=tooltip)
 
 
 
@@ -30,6 +32,7 @@ while running:
 
         for element in ui_elements:
             element.check_click(event)
+            element.check_hover()
     
     
     
@@ -37,7 +40,7 @@ while running:
     
     for element in ui_elements:
             element.render(screen)
-    
+
 
     pygame.display.flip()
 
