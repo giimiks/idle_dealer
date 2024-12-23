@@ -56,6 +56,10 @@ class Tooltip(UI_Element):
     def on_hover(self):
         return super().on_hover()
 
+    def update_position(self, mouse_pos):
+        self.x, self.y = mouse_pos
+        self.rect.bottomright = mouse_pos
+        
     def show(self, screen: pygame.SurfaceType):
         if self.texture:
             screen.blit(self.texture, (self.x, self.y))
@@ -83,8 +87,8 @@ class Button(UI_Element):
         if self.tooltip is None:
             return super().on_hover()
         else:
-            print("y")
-            return self.tooltip.show(self.tooltip.screen)
+            self.tooltip.update_position(pygame.mouse.get_pos())  # Aktualizuje pozici tooltipu
+            self.tooltip.show(self.tooltip.screen)
             
             
     
